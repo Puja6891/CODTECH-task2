@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+// Function to convert temperatures
+float convertTemperature(float temperature, char fromScale, char toScale) {
+    float convertedTemperature = 0;
+
+    // Convert from Celsius
+    if (fromScale == 'C') {
+        if (toScale == 'F') {
+            convertedTemperature = (temperature * 9 / 5) + 32;
+        } else if (toScale == 'K') {
+            convertedTemperature = temperature + 273.15f;
+        }
+    }
+    // Convert from Fahrenheit
+    else if (fromScale == 'F') {
+        if (toScale == 'C') {
+            convertedTemperature = (temperature - 32) * 5 / 9;
+        } else if (toScale == 'K') {
+            convertedTemperature = (temperature - 32) * 5 / 9 + 273.15f;
+        }
+    }
+    // Convert from Kelvin
+    else if (fromScale == 'K') {
+        if (toScale == 'C') {
+            convertedTemperature = temperature - 273.15f;
+        } else if (toScale == 'F') {
+            convertedTemperature = (temperature - 273.15f) * 9 / 5 + 32;
+        }
+    }
+    return convertedTemperature;
+}
+
+int main() {
+    float temperature, converted;
+    char fromScale, toScale;
+
+    // User input
+    printf("Enter the temperature: ");
+    scanf("%f", &temperature);
+    printf("Enter the scale of the temperature (C/F/K): ");
+    scanf(" %c", &fromScale);
+    printf("Enter the scale to convert to (C/F/K): ");
+    scanf(" %c", &toScale);
+
+    // Convert and display the result
+    converted = convertTemperature(temperature, fromScale, toScale);
+    printf("Converted temperature: %.2f %c\n", converted, toScale);
+
+    return 0;
+}
